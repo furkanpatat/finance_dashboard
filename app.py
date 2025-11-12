@@ -308,7 +308,7 @@ elif source == "Kripto (Canlı)":
     # Binance'ten USDT paritelerini çek
     @st.cache_data(ttl=3600)
     def get_binance_symbols():
-        url = "https://api.binance.com/api/v3/ticker/price"
+        url = "https://data-api.binance.vision/api/v3/ticker/price"
         try:
             r = requests.get(url, timeout=10)
             r.raise_for_status()
@@ -331,7 +331,7 @@ elif source == "Kripto (Canlı)":
     )
 
     # Anlık fiyat ve 24 saatlik değişim
-    quote_url = f"https://api.binance.com/api/v3/ticker/24hr?symbol={coin}"
+    quote_url = f"https://data-api.binance.vision/api/v3/ticker/24hr?symbol={coin}"
     try:
         q = requests.get(quote_url, timeout=10).json()
         if "lastPrice" not in q:
@@ -355,7 +355,7 @@ elif source == "Kripto (Canlı)":
         import pandas as pd
         from datetime import datetime
 
-        candles_url = f"https://api.binance.com/api/v3/klines?symbol={coin}&interval=15m&limit=96"
+        candles_url = f"https://data-api.binance.vision/api/v3/klines?symbol={coin}&interval=15m&limit=96"
         c = requests.get(candles_url, timeout=10).json()
 
         df = pd.DataFrame(c, columns=[
